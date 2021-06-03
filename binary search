@@ -1,0 +1,58 @@
+/* c program to perform binary search using both recursive and non recursive functions */
+#include<stdio.h>
+void binary_search_non_re(int n,int arr[*],int beg,int end,int val);  //non recursive function
+int binary_search_re(int n,int arr[*],int beg,int end,int val);//recursive function
+void main()
+{
+	int i,n,val,pos;
+	printf("enter the size of an array");
+	scanf("%d",&n);
+	int arr[n];
+	printf("\n enter the %d elements in ascending order",n);
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&arr[i]);
+	}
+	printf("enter the value to search");
+	scanf("%d",&val);
+	binary_search_non_re(n,arr,0,n-1,val);   //non recursive function
+	pos= binary_search_re(n,arr,0,n-1,val);  //recursive function
+	if(pos!=0)
+	printf("\n element %d found at %dth position using recursive function",val ,pos+1);
+	else
+	printf("\n element %d does not found in array using recursive function",val);
+}
+void binary_search_non_re(int n,int arr[n],int beg,int end,int val) //non recursive function
+{
+	int mid,pos=-1;
+	while(beg<=end)
+	{
+		mid = (beg+end)/2;
+		if(arr[mid]==val)
+		{
+			pos=mid+1;
+			printf("\n element %d is found at %dth position using non recursive function",val,pos);
+			break;
+		}
+		else if(arr[mid]>val)
+     		end=mid-1;
+		else
+	    	beg=mid+1;
+	}
+	if(pos==-1)
+	printf("\nelement %d does not found in the array using non recursive function",val);
+ } 
+ int binary_search_re(int n,int arr[n],int beg,int end,int val) //recursive function
+ {
+ 	if(beg<=end)
+ 	{
+ 		int mid=(beg+end)/2;
+ 		if(arr[mid]==val)
+ 		return mid;
+ 	    if(arr[mid]>val)
+ 		return binary_search_re(n,arr,beg,mid-1,val);
+ 		else
+ 		return binary_search_re(n,arr,mid+1,end,val);
+	 }
+	 return -1;
+ }
