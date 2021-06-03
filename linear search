@@ -1,0 +1,50 @@
+/* c program to perform linear search by using both non recursion and recursion */
+#include<stdio.h>
+void linear_search_non_re (int n,int arr[*],int val);  //non recursive function
+int linear_search_re(int n,int arr[*],int val);  //recursive function
+void main()
+{
+	int i,n,val,pos;
+	printf("enter the size of an array");
+	scanf("%d",&n);
+	int arr[n];
+	printf("enter the %d elements in ascending order",n);
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&arr[i]);
+	}
+	printf("enter the value to search");
+	scanf("%d",&val);
+	linear_search_non_re(n,arr,val);  //non recursive function
+	pos=linear_search_re(n,arr,val);  //recursive function
+	if(pos!=0)
+	printf("\n element %d found at %dth position using recursive function",val,pos);
+	else
+	printf("\n element %d does not found using recursive function",val);
+}
+void linear_search_non_re(int n,int arr[n],int val) //non recursive function
+{
+	int i,found=0,pos=-1;
+	for(i=0;i<n;i++)
+	{
+		if(arr[i]==val)
+		{
+			found=1;
+			pos=i;
+			printf("\n element %d found at %dth position using non recursive function",val,i+1);
+			break;
+		}
+	}
+	if(found==0)
+	printf("\n element %d does not found using non recursive function",val);
+}
+int linear_search_re(int n,int arr[n],int val)  //recursive function
+{
+	if(n>=0)
+	{
+		if(arr[n-1]==val)
+		return n;
+		else
+		return linear_search_re(n-1,arr,val);
+	}
+}
